@@ -21,7 +21,8 @@ public class TestPage{
 
 public TestPage(WebDriver driver){
 
-System.out.print("page constrcutor init");
+System.out.println(Constant.MSG);
+//Log.info("first log");
 
 this.driver=driver;
 

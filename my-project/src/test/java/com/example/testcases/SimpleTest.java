@@ -15,12 +15,13 @@ import org.openqa.selenium.JavascriptExecutor;
 import java.time.Duration;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+//import utility.Constant;
 
 public class SimpleTest{
 
 TestPage tp;
 
-String url = "https://bonigarcia.dev/selenium-webdriver-java/index.html";
+//String url = "https://bonigarcia.dev/selenium-webdriver-java/index.html";
 
 
 
@@ -29,7 +30,7 @@ WebDriverManager.chromedriver().setup();
 WebDriver driver;
 driver = new ChromeDriver();
 driver.manage().window().maximize();
-driver.get(url); 
+driver.get(Constant.URL); 
 tp = new TestPage(driver); 
 tp.clickWebFormButton();
 driver.quit();
