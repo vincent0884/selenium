@@ -1,41 +1,61 @@
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
-import java.util.List;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.JavascriptExecutor;
-import java.time.Duration;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-//import utility.Constant;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 public class SimpleTest{
 
 TestPage tp;
-
-//String url = "https://bonigarcia.dev/selenium-webdriver-java/index.html";
-
-
-
-public void test1(){
-WebDriverManager.chromedriver().setup();
 WebDriver driver;
+private static final Logger logger = LoggerFactory.getLogger(SimpleTest.class);
+ExtentSparkReporter reporter = new ExtentSparkReporter("extent-report.html");
+ExtentReports extent = new ExtentReports();
+ExtentTest test;
+
+@Before
+public void setup(){
+extent.attachReporter(reporter);
+test = extent.createTest("MyFirstTest", "Sample description");
+WebDriverManager.chromedriver().setup();
 driver = new ChromeDriver();
 driver.manage().window().maximize();
 driver.get(Constant.URL); 
+}
+
+@After
+public void teardown(){
+driver.quit();
+extent.flush();
+}
+
+@Test
+public void test1(){
+assertEquals("Hands-On Selenium WebDriver with Java",driver.getTitle());
+logger.info("Test compled");
+test.log(Status.INFO, "This step shows usage of log(status, details)");
+
+
+}
+
+@Test
+public void test2(){
 tp = new TestPage(driver); 
 tp.clickWebFormButton();
-driver.quit();
-	
-
+logger.info("Test compled");
+test.log(Status.INFO, "This step shows usage of log(status, details)");
 
 
 }
