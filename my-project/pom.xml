@@ -24,6 +24,19 @@
         <scope>test</scope>
     </dependency>
    
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.4.0</version> <!-- Or the version you prefer -->
+    <scope>test</scope>
+</dependency>
+
+<dependency>
+  <groupId>org.apache.maven.plugins</groupId>
+  <artifactId>maven-failsafe-plugin</artifactId>
+  <version>3.2.5</version>
+  <type>maven-plugin</type>
+</dependency>
 
 <dependency>
     <groupId>junit</groupId>
@@ -61,7 +74,16 @@
         <plugins>
             
             
-           
+           <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M5</version> <!-- Or the version you prefer -->
+        <configuration>
+            <suiteXmlFiles>
+                <suiteXmlFile>testng.xml</suiteXmlFile> <!-- Optionally, specify your testng.xml file here -->
+            </suiteXmlFiles>
+        </configuration>
+    </plugin>
 
 
 

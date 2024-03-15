@@ -16,6 +16,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import java.io.File;
+import org.apache.commons.io.FileUtils;
+
 public class SimpleTest{
 
 TestPage tp;
@@ -37,6 +42,15 @@ driver.get(Constant.URL);
 
 @After
 public void teardown(){
+ // Take a screenshot
+        File screenshotFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+
+        try {
+            // Save the screenshot to a file
+            FileUtils.copyFile(screenshotFile, new File("C:\\Users\\Astami\\Desktop\\selenium\\my-project\\screenshot.png"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 driver.quit();
 extent.flush();
 }
